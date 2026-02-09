@@ -29,3 +29,8 @@ def convert_RGB_to_luminosity_greyscale(rgb_img_array):
         greyscale_img_array.append(new_row)
     return greyscale_img_array
 
+def preview_image(image_array):
+    img = Image.fromarray(np.array(image_array, dtype=np.uint8)) #uint8 for unisgned integer /0-255
+    img.show()
+
+#preview_image(convert_RGB_to_luminosity_greyscale(convert_image_to_RGB('/Users/ewanmccairn/Downloads/AI Animals Brainrot.jpeg')))
