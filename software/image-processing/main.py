@@ -6,13 +6,13 @@ from greyscalethreshold import greyscale_threshold
 
 
 print("Image converting to RGB")
-rgb_image = convert_image_to_RGB("/Users/ewanmccairn/Downloads/theloq.png")
+rgb_image = convert_image_to_RGB("software/image-processing/images/rubik's.jpg")
 print("Done!")
 print("Resizing image...")
 resized_image = resize(rgb_image, 500, 500)
 print("Done!")
 print("Image converting to greyscale...")
-image_array = convert_RGB_to_luminosity_greyscale(rgb_image)
+image_array = convert_RGB_to_luminosity_greyscale(resized_image)
 print("Done!")
 
 print("Blurring image...")
@@ -28,4 +28,4 @@ thresholded_array = greyscale_threshold(sobel_array, 50) # chosen threshold 50/2
 print("Done!")
 
 print("Previewing...")
-preview_image(resized_image)
+preview_image(thresholded_array)
