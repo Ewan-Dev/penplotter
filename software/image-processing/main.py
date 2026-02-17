@@ -25,7 +25,7 @@ sobel_array = sobel_edge_detection(blurred_array)
 print("Done!")
 
 print("Thresholding...")
-thresholded_array = greyscale_threshold(sobel_array, 50) # chosen threshold 50/255
+thresholded_array = greyscale_threshold(sobel_array, 150) # chosen threshold 50/255
 print("Done!")
 
 print("Zhang-Suen thinning")

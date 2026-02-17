@@ -11,6 +11,7 @@ def zhang_suen_thinning(image_array):
                 row.append(0)
         image_array_binary.append(row)
     while True:
+            changed = False
             to_remove = [] # stores pixels marked for removal
             for y in range(1, len(image_array_binary) - 1):
                 for x in range(1, len(image_array_binary[0]) - 1):
@@ -29,17 +30,18 @@ def zhang_suen_thinning(image_array):
                                     b_w_transitions += 1
                             if b_w_transitions != 1:
                                 continue
-                            if neighbours[0] * neighbours[2] * neighbours[4] != 0:
+                            if neighbours[1] * neighbours[3] * neighbours[5] != 0:
                                 continue
-                            if neighbours[2] * neighbours[4] * neighbours[6] != 0:
+                            if neighbours[3] * neighbours[5] * neighbours[7] != 0:
                                 continue
-                            to_remove.append((x, y))
 
-            if not to_remove:
-                break
-            for x,y in to_remove:
-                image_array_binary[y][x] = 0
-            result = []
+                            to_remove.append((x, y))
+            if to_remove:
+                changed = True
+                for x,y in to_remove:
+                    image_array_binary[y][x] = 0
+
+            to_remove = []
             for y in range(1, len(image_array_binary) - 1):
                 for x in range(1, len(image_array_binary[0]) - 1):
                     if image_array_binary[y][x] == 1:
@@ -57,17 +59,19 @@ def zhang_suen_thinning(image_array):
                                     b_w_transitions += 1
                             if b_w_transitions != 1:
                                 continue
-                            if neighbours[0] * neighbours[2] * neighbours[6] != 0:
+                            if neighbours[1] * neighbours[3] * neighbours[7] != 0:
                                 continue
-                            if neighbours[2] * neighbours[4] * neighbours[6] != 0:
+                            if neighbours[1] * neighbours[5] * neighbours[7] != 0:
                                 continue
                             to_remove.append((x, y))
-
-            if not to_remove:
+            if to_remove:
+                changed = True
+                for x,y in to_remove:
+                    image_array_binary[y][x] = 0
+            if not changed:
                 break
-            for x,y in to_remove:
-                image_array_binary[y][x] = 0
-            result = []
+
+    result = []
     for y in range(len(image_array_binary)):
         row = []
         for x in range(len(image_array_binary[0])):
