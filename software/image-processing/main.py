@@ -5,9 +5,9 @@ from edge_detection import sobel_edge_detection
 from greyscalethreshold import greyscale_threshold
 from zhangseunthinning import zhang_suen_thinning
 
-
+sobel_threshold = int(input("Input Sobel threshold 0-255: "))
 print("Image converting to RGB")
-rgb_image = convert_image_to_RGB("images/python.png")
+rgb_image = convert_image_to_RGB("images/elegant-horse.webp")
 preview_image(rgb_image)
 print("Done!")
 print("Resizing image...")
@@ -30,7 +30,7 @@ preview_image(sobel_array)
 print("Done!")
 
 print("Thresholding...")
-thresholded_array = greyscale_threshold(sobel_array, 150) # chosen threshold 50/255
+thresholded_array = greyscale_threshold(sobel_array, sobel_threshold) # chosen threshold 50/255
 preview_image(thresholded_array)
 print("Done!")
 
