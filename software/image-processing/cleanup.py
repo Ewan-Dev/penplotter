@@ -4,9 +4,9 @@ def clean_image(image_array, clean_iterations):
         cleaned_array = []
         image_width = len(current_image[0])
         image_height = len(current_image)
-        for y in range(1, image_height-1):
+        for y in range(image_height):
             cleaned_row = []
-            for x in range(1, image_width-1):
+            for x in range(image_width):
                 if x == 0 or y == 0 or x == image_width-1 or y == image_height-1:
                     cleaned_row.append(current_image[y][x])
                     continue
