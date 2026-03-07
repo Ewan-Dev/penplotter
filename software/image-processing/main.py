@@ -4,10 +4,11 @@ from gaussian import gaussian_blur
 from edge_detection import sobel_edge_detection
 from greyscalethreshold import greyscale_threshold
 from zhangseunthinning import zhang_suen_thinning
+from cleanup import clean_image
 
 sobel_threshold = int(input("Input Sobel threshold 0-255: "))
 print("Image converting to RGB")
-rgb_image = convert_image_to_RGB("images/elegant-horse.webp")
+rgb_image = convert_image_to_RGB("images/rubik's.jpg")
 preview_image(rgb_image)
 print("Done!")
 print("Resizing image...")
@@ -36,8 +37,13 @@ print("Done!")
 
 print("Zhang-Suen thinning")
 thinned_image = zhang_suen_thinning(thresholded_array)
-preview_image(thresholded_array)
+preview_image(thinned_image)
+print("Done!")
+
+
+print("Cleaning...")
+cleaned_image = clean_image(thinned_image)
 print("Done!")
 
 print("Previewing...")
-preview_image(thinned_image)
+preview_image(cleaned_image)
