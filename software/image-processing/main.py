@@ -7,6 +7,7 @@ from zhangseunthinning import zhang_suen_thinning
 from cleanup import clean_image
 
 sobel_threshold = int(input("Input Sobel threshold 0-255: "))
+clean_iterations = int(input("Input how many cleaning iterations: "))
 print("Image converting to RGB")
 rgb_image = convert_image_to_RGB("images/rubik's.jpg")
 preview_image(rgb_image)
@@ -42,7 +43,7 @@ print("Done!")
 
 
 print("Cleaning...")
-cleaned_image = clean_image(thinned_image)
+cleaned_image = clean_image(thinned_image, clean_iterations)
 print("Done!")
 
 print("Previewing...")
