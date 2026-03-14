@@ -5,11 +5,16 @@ from edge_detection import sobel_edge_detection
 from greyscalethreshold import greyscale_threshold
 from zhangseunthinning import zhang_suen_thinning
 from cleanup import clean_image
+from imgcomponents import get_components
+from rgbtobinary import rgb_to_binary
+import time
+
+start = time.perf_counter()
 
 sobel_threshold = int(input("Input Sobel threshold 0-255: "))
 clean_iterations = int(input("Input how many cleaning iterations: "))
 print("Image converting to RGB")
-rgb_image = convert_image_to_RGB("images/rubik's.jpg")
+rgb_image = convert_image_to_RGB("images/london-bus.png")
 preview_image(rgb_image)
 print("Done!")
 print("Resizing image...")
@@ -46,5 +51,13 @@ print("Cleaning...")
 cleaned_image = clean_image(thinned_image, clean_iterations)
 print("Done!")
 
+print("Getting components...")
+cleaned_binary = rgb_to_binary(cleaned_image)
+num_components = len(get_components(cleaned_binary))
+print(f"Components found: {num_components}")
+
 print("Previewing...")
 preview_image(cleaned_image)
+
+end = time.perf_counter()
+print(f"Finished in {end-start:.4}s!")
