@@ -5,8 +5,7 @@ from edge_detection import sobel_edge_detection
 from greyscalethreshold import greyscale_threshold
 from zhangseunthinning import zhang_suen_thinning
 from cleanup import clean_image
-from imgcomponents import get_components
-from rgbtobinary import rgb_to_binary
+from imgcomponents import rgb_to_binary, get_components
 import time
 
 start = time.perf_counter()
@@ -52,8 +51,8 @@ cleaned_image = clean_image(thinned_image, clean_iterations)
 print("Done!")
 
 print("Getting components...")
-cleaned_binary = rgb_to_binary(cleaned_image)
-num_components = len(get_components(cleaned_binary))
+binary_array = rgb_to_binary(cleaned_image)
+num_components = len(get_components(binary_array))
 print(f"Components found: {num_components}")
 
 print("Previewing...")
