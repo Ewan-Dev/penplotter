@@ -1,6 +1,8 @@
 # penplotter
 penplotter is a tool for converting images to plots on a sheet of paper. We aim to use no image processing libraries for filters.
 
+-@Ewan-Dev, @peiallll
+
 ## image process pipeline
 1. resize
 2. luminosity greyscale
