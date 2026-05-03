@@ -1,6 +1,11 @@
 import RPi.GPIO as GPIO
 import time
 
+with open("image_code.txt", "r") as file:
+    components = file.read()
+
+print(components)
+
 PULX = 18
 DIRX = 23
 
