@@ -1,4 +1,11 @@
-def move_to(x0,y0,x1,y1,steps_per_pixel):
+import RPi.GPIO as GPIO
+import time
+PULX = 18
+DIRX = 23
+
+PULY = 24
+DIRY = 25
+def move_to(x0,y0,x1,y1):
     dx = abs(x1-x0) # how far horizantally
     dy = abs(y1-y0) # how far vertically
     
