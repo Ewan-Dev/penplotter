@@ -59,5 +59,8 @@ num_components = len(components)
 print("Previewing...")
 preview_image(cleaned_image)
 
+with open("image_code.txt", "w", encoding="utf-8") as file:
+    file.write(str(components))
+
 end = time.perf_counter()
 print(f"Finished in {end-start:.4}s!")
