@@ -1,20 +1,26 @@
 import RPi.GPIO as GPIO
 import time
 
-PUL = 18
-DIR = 23
+PULX = 18
+DIRX = 23
+
+PULY = 24
+DIRY = 25
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(PUL, GPIO.OUT)
-GPIO.setup(DIR, GPIO.OUT)
+GPIO.setup(PULX, GPIO.OUT)
+GPIO.setup(DIRX, GPIO.OUT)
+GPIO.setup(PULY, GPIO.OUT)
+GPIO.setup(DIRY, GPIO.OUT)
 
-GPIO.output(DIR, GPIO.HIGH)
+GPIO.output(DIRX, GPIO.HIGH)
+GPIO.output(DIRX, GPIO.LOW)
 
 try:
     while True:
-        GPIO.output(PUL, GPIO.HIGH)
+        GPIO.output(PULX, GPIO.HIGH)
         time.sleep(0.001)
-        GPIO.output(PUL, GPIO.LOW)
+        GPIO.output(PULX, GPIO.LOW)
         time.sleep(0.001)
 
 except KeyboardInterrupt:
