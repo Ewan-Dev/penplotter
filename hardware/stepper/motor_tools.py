@@ -1,10 +1,16 @@
 import RPi.GPIO as GPIO
 import time
+from gpiozero import AngularServo
+from gpiozero.pins.pigpio import PiGPIOFactory
+
+factory = PiGPIOFactory()
+servo = AngularServo(26, min_angle=-90, max_angle=90, pin_factory=factory)
 PULX = 18
 DIRX = 23
 
 PULY = 24
 DIRY = 25
+
 def move_to(x0,y0,x1,y1):
     dx = abs(x1-x0) # how far horizantally
     dy = abs(y1-y0) # how far vertically
@@ -45,3 +51,14 @@ def move_to(x0,y0,x1,y1):
             y += dir_y
             error +=dx
             
+def pen_up():
+
+    servo.angle = -90
+    time.sleep(0.2)
+def pen_down():
+
+    servo.angle = 30
+    time.sleep(0.2)
+    
+def home(x0,y0):
+    move_to(x0,y0,0,0)
