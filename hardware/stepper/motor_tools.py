@@ -62,3 +62,27 @@ def pen_down():
     
 def home(x0,y0):
     move_to(x0,y0,0,0)
+
+def switch_pen(number, x0, y0):
+    pen_down()
+    if number == 1:
+        move_to(x0,y0,0,20)
+    elif number == 2:
+        move_to(x0,y0,0,40)
+    elif number == 3:
+        move_to(x0,y0,0,60)
+    elif number == 4:
+        move_to(x0,y0,0,80)
+    pen_up()
+
+def place_pen_in_holder(number, x0, y0):
+    pen_up()
+    if number == 1:
+        move_to(x0,y0,0,20)
+    if number == 2:
+        move_to(x0,y0,0,40)
+    if number == 3:
+        move_to(x0,y0,0,60)
+    if number == 4:
+        move_to(x0,y0,0,80)
+    pen_down()
