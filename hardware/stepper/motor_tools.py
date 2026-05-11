@@ -1,15 +1,18 @@
 import RPi.GPIO as GPIO
 import time
+from config import *
 from gpiozero import AngularServo
 from gpiozero.pins.pigpio import PiGPIOFactory
 
 factory = PiGPIOFactory()
 servo = AngularServo(26, min_angle=-90, max_angle=90, pin_factory=factory)
-PULX = 18
-DIRX = 23
 
-PULY = 24
-DIRY = 25
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(PULX, GPIO.OUT)
+GPIO.setup(DIRX, GPIO.OUT)
+GPIO.setup(PULY, GPIO.OUT)
+GPIO.setup(DIRY, GPIO.OUT)
 
 def move_to(x0,y0,x1,y1):
     dx = abs(x1-x0) # how far horizantally

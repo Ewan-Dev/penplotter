@@ -9,17 +9,6 @@ with open("image_code.txt", "r") as file:
 
 print(components)
 
-PULX = 18
-DIRX = 23
-
-PULY = 24
-DIRY = 25
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(PULX, GPIO.OUT)
-GPIO.setup(DIRX, GPIO.OUT)
-GPIO.setup(PULY, GPIO.OUT)
-GPIO.setup(DIRY, GPIO.OUT)
 pen_up()
 
 try:
