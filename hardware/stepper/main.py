@@ -28,6 +28,7 @@ try:
             move_to(pixel_x, pixel_y, int(component[j+1][0]),  int(component[j+1][1]))
             end_component_coords = (int(component[j+1][0]),  int(component[j+1][1]))
         pen_up()
+        
         if i == len(components) -1:
             home(end_component_coords[0], end_component_coords[1])
         else:

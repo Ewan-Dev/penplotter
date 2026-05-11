@@ -40,17 +40,17 @@ def move_to(x0,y0,x1,y1):
         error2 = 2* error
         if error2 > -(dy):
             GPIO.output(PULX, GPIO.HIGH)
-            time.sleep(0.001)
+            time.sleep(STEP_DELAY)
             GPIO.output(PULX, GPIO.LOW)
-            time.sleep(0.001)
+            time.sleep(STEP_DELAY)
             x += dir_x
             error -= dy
             
         if error2 < (dx): 
             GPIO.output(PULY, GPIO.HIGH)
-            time.sleep(0.001)
+            time.sleep(STEP_DELAY)
             GPIO.output(PULY, GPIO.LOW)
-            time.sleep(0.001)
+            time.sleep(STEP_DELAY)
             y += dir_y
             error +=dx
             
