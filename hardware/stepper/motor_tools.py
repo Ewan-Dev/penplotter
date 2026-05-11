@@ -5,7 +5,7 @@ from gpiozero import AngularServo
 from gpiozero.pins.pigpio import PiGPIOFactory
 
 factory = PiGPIOFactory()
-servo = AngularServo(26, min_angle=-90, max_angle=90, pin_factory=factory)
+servo = AngularServo(SERVO_PIN, min_angle=-90, max_angle=90, pin_factory=factory)
 
 GPIO.setmode(GPIO.BCM)
 

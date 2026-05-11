@@ -6,6 +6,10 @@ import ast
 from motor_tools import move_to, pen_up, pen_down, home
 with open("image_code.txt", "r") as file:
     components = ast.literal_eval(file.read())
+if not components:
+    print("no components to draw")
+    GPIO.cleanup()
+    exit()
 
 print(components)
 
@@ -16,7 +20,7 @@ try:
     for i, component in enumerate(components):
         print("NEW COMPONENT")
         pen_down()
-        end_component_coords = None
+        end_component_coords = (int(component[-1][0]), int(component[-1][1]))
         for j in range(0, len(component)-1):
             print(component[j])
             pixel_x = int(component[j][0])
