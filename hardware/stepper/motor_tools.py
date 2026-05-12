@@ -1,20 +1,25 @@
-import RPi.GPIO as GPIO
+import lgpio
 import time
 from config import *
 from gpiozero import AngularServo
-from gpiozero.pins.pigpio import PiGPIOFactory
 
-factory = PiGPIOFactory()
-servo = AngularServo(SERVO_PIN, min_angle=-90, max_angle=90, pin_factory=factory)
 
-GPIO.setmode(GPIO.BCM)
+h = lgpio.gpiochip_open(0)
+lgpio.gpio_claim_output(h, PULX)
+lgpio.gpio_claim_output(h, PULY)
+lgpio.gpio_claim_output(h, DIRX)
+lgpio.gpio_claim_output(h, DIRY)
+PIXEL_TO_STEP_SCALE_FACTOR = 10
 
-GPIO.setup(PULX, GPIO.OUT)
-GPIO.setup(DIRX, GPIO.OUT)
-GPIO.setup(PULY, GPIO.OUT)
-GPIO.setup(DIRY, GPIO.OUT)
+servo = AngularServo(SERVO_PIN)
 
 def move_to(x0,y0,x1,y1):
+    
+    x0 *= PIXEL_TO_STEP_SCALE_FACTOR
+    y0 *= PIXEL_TO_STEP_SCALE_FACTOR
+    x1 *= PIXEL_TO_STEP_SCALE_FACTOR
+    y1 *= PIXEL_TO_STEP_SCALE_FACTOR
+    
     dx = abs(x1-x0) # how far horizantally
     dy = abs(y1-y0) # how far vertically
     
@@ -26,34 +31,25 @@ def move_to(x0,y0,x1,y1):
     x = x0
     y = y0
     
-    if dir_x >= 0:
-        GPIO.output(DIRX, GPIO.HIGH)
-    else:
-        GPIO.output(DIRX, GPIO.LOW)
-
-    if dir_y >= 0:
-        GPIO.output(DIRY, GPIO.HIGH)
-    else:
-        GPIO.output(DIRY, GPIO.LOW)
+    lgpio.gpio_write(h, DIRX, 1 if dir_x >= 0 else 0)
+    lgpio.gpio_write(h, DIRY, 1 if dir_y >= 0 else 0)
         
     while x != x1 or y != y1: # repeat until target met
-        error2 = 2* error
-        if error2 > -(dy):
-            GPIO.output(PULX, GPIO.HIGH)
-            time.sleep(STEP_DELAY)
-            GPIO.output(PULX, GPIO.LOW)
-            time.sleep(STEP_DELAY)
+        error2 = 2 * error
+        if error2 > -dy and x != x1:
+            lgpio.gpio_write(h, PULX, 1)
+            time.sleep(0.0002)
+            lgpio.gpio_write(h, PULX, 0)
             x += dir_x
             error -= dy
-            
-        if error2 < (dx): 
-            GPIO.output(PULY, GPIO.HIGH)
-            time.sleep(STEP_DELAY)
-            GPIO.output(PULY, GPIO.LOW)
-            time.sleep(STEP_DELAY)
+        if error2 < dx and y != y1:
+            lgpio.gpio_write(h, PULY, 1)
+            time.sleep(0.0002)
+            lgpio.gpio_write(h, PULY, 0)
             y += dir_y
-            error +=dx
-            
+            error += dx
+        time.sleep(STEP_DELAY)
+
 def pen_up():
 
     servo.angle = -90

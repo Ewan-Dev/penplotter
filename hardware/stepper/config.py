@@ -6,4 +6,4 @@ DIRY = 25 # pin 22
 
 SERVO_PIN = 26 # pin 37
 
-STEP_DELAY = 0.00075 # 0.75ms
+STEP_DELAY = 0.0005 # 0.75ms
