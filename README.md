@@ -17,7 +17,3 @@ penplotter is a tool for converting images to plots on a sheet of paper. We use 
 | before processing: | after processing: |
 | -------- | -------- |
 | <img src="/software/image-processing/images/teddybob.png" width=80px>   | <img src='/teddybob-lines.png' width=100px>   |
-
-## to-do
-- path efficiency
-- path to plots (stepper motors)
